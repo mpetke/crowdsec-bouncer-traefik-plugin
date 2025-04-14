@@ -9,9 +9,9 @@ import (
 	"net/url"
 	"strings"
 
-	cache "github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin/pkg/cache"
-	configuration "github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin/pkg/configuration"
-	logger "github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin/pkg/logger"
+	cache "crowdsec-bouncer-traefik-plugin/pkg/cache"
+	configuration "crowdsec-bouncer-traefik-plugin/pkg/configuration"
+	logger "crowdsec-bouncer-traefik-plugin/pkg/logger"
 )
 
 // Client Captcha client.

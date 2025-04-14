@@ -1,8 +1,8 @@
 ![GitHub](https://img.shields.io/github/license/maxlerebourg/crowdsec-bouncer-traefik-plugin)
 ![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/maxlerebourg/crowdsec-bouncer-traefik-plugin)
 ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/maxlerebourg/crowdsec-bouncer-traefik-plugin)
-[![Build Status](https://github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin/actions/workflows/go-cross.yml/badge.svg)](https://github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin/actions)
-[![Go Report Card](https://goreportcard.com/badge/github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin)](https://goreportcard.com/badge/github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin)
+[![Build Status](https://crowdsec-bouncer-traefik-plugin/actions/workflows/go-cross.yml/badge.svg)](https://crowdsec-bouncer-traefik-plugin/actions)
+[![Go Report Card](https://goreportcard.com/badge/crowdsec-bouncer-traefik-plugin)](https://goreportcard.com/badge/crowdsec-bouncer-traefik-plugin)
 
 # Crowdsec Bouncer Traefik plugin
 
@@ -485,7 +485,7 @@ The following declaration (given here in YAML) defines a plugin:
 experimental:
   plugins:
     bouncer:
-      moduleName: github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin
+      moduleName: crowdsec-bouncer-traefik-plugin
       version: vX.Y.Z # To update
 ```
 
@@ -521,6 +521,7 @@ http:
           httpTimeoutSeconds: 10
           crowdsecMode: live
           crowdsecAppsecEnabled: false
+          crowdsecAppsecScheme: http
           crowdsecAppsecHost: crowdsec:7422
           crowdsecAppsecPath: "/"
           crowdsecAppsecFailureBlock: true
@@ -643,7 +644,7 @@ To communicate with the LAPI in HTTPS you need to either accept any certificates
 Set the `crowdsecLapiScheme` to https.
 
 Crowdsec must be listening in HTTPS for this to work.
-Please see the [tls-auth example](https://github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin/blob/main/examples/tls-auth/README.md) or the official documentation: [docs.crowdsec.net/docs/local_api/tls_auth/](https://docs.crowdsec.net/docs/local_api/tls_auth/)
+Please see the [tls-auth example](https://crowdsec-bouncer-traefik-plugin/blob/main/examples/tls-auth/README.md) or the official documentation: [docs.crowdsec.net/docs/local_api/tls_auth/](https://docs.crowdsec.net/docs/local_api/tls_auth/)
 
 #### Manually add an IP to the blocklist (for testing purposes)
 
@@ -657,25 +658,25 @@ docker exec crowdsec cscli decisions remove --ip 10.0.0.10 -t captcha
 
 ### Examples
 
-#### 1. Behind another proxy service (ex: clouflare) [examples/behind-proxy/README.md](https://github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin/blob/main/examples/behind-proxy/README.md)
+#### 1. Behind another proxy service (ex: clouflare) [examples/behind-proxy/README.md](https://crowdsec-bouncer-traefik-plugin/blob/main/examples/behind-proxy/README.md)
 
-#### 2. With Redis as an external shared cache [examples/redis-cache/README.md](https://github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin/blob/main/examples/redis-cache/README.md)
+#### 2. With Redis as an external shared cache [examples/redis-cache/README.md](https://crowdsec-bouncer-traefik-plugin/blob/main/examples/redis-cache/README.md)
 
-#### 3. Using Trusted IP (ex: LAN OR VPN) that won't get filtered by crowdsec [examples/trusted-ips/README.md](https://github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin/blob/main/examples/trusted-ips/README.md)
+#### 3. Using Trusted IP (ex: LAN OR VPN) that won't get filtered by crowdsec [examples/trusted-ips/README.md](https://crowdsec-bouncer-traefik-plugin/blob/main/examples/trusted-ips/README.md)
 
-#### 4. Using Crowdsec and Traefik installed as binary in a single VM [examples/binary-vm/README.md](https://github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin/blob/main/examples/binary-vm/README.md)
+#### 4. Using Crowdsec and Traefik installed as binary in a single VM [examples/binary-vm/README.md](https://crowdsec-bouncer-traefik-plugin/blob/main/examples/binary-vm/README.md)
 
-#### 5. Using https communication and tls authentication with Crowdsec [examples/tls-auth/README.md](https://github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin/blob/main/examples/tls-auth/README.md)
+#### 5. Using https communication and tls authentication with Crowdsec [examples/tls-auth/README.md](https://crowdsec-bouncer-traefik-plugin/blob/main/examples/tls-auth/README.md)
 
-#### 6. Using Crowdsec and Traefik in Kubernetes [examples/kubernetes/README.md](https://github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin/blob/main/examples/kubernetes/README.md)
+#### 6. Using Crowdsec and Traefik in Kubernetes [examples/kubernetes/README.md](https://crowdsec-bouncer-traefik-plugin/blob/main/examples/kubernetes/README.md)
 
-#### 7. Using Traefik in standalone mode without Crowdsec [examples/standalone-mode/README.md](https://github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin/blob/main/examples/standalone-mode/README.md)
+#### 7. Using Traefik in standalone mode without Crowdsec [examples/standalone-mode/README.md](https://crowdsec-bouncer-traefik-plugin/blob/main/examples/standalone-mode/README.md)
 
-#### 8. Using Traefik with AppSec feature enabled [examples/appsec-enabled/README.md](https://github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin/blob/main/examples/appsec-enabled/README.md)
+#### 8. Using Traefik with AppSec feature enabled [examples/appsec-enabled/README.md](https://crowdsec-bouncer-traefik-plugin/blob/main/examples/appsec-enabled/README.md)
 
-#### 9. Using Traefik with Captcha remediation feature enabled [examples/captcha/README.md](https://github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin/blob/main/examples/captcha/README.md)
+#### 9. Using Traefik with Captcha remediation feature enabled [examples/captcha/README.md](https://crowdsec-bouncer-traefik-plugin/blob/main/examples/captcha/README.md)
 
-#### 10. Using Traefik with Custom Ban HTML Page [examples/custom-ban-page/README.md](https://github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin/blob/main/examples/custom-ban-page/README.md)
+#### 10. Using Traefik with Custom Ban HTML Page [examples/custom-ban-page/README.md](https://crowdsec-bouncer-traefik-plugin/blob/main/examples/custom-ban-page/README.md)
 
 ### Local Mode
 

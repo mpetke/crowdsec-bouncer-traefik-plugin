@@ -16,11 +16,11 @@ import (
 	"text/template"
 	"time"
 
-	cache "github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin/pkg/cache"
-	captcha "github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin/pkg/captcha"
-	configuration "github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin/pkg/configuration"
-	ip "github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin/pkg/ip"
-	logger "github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin/pkg/logger"
+	cache "crowdsec-bouncer-traefik-plugin/pkg/cache"
+	captcha "crowdsec-bouncer-traefik-plugin/pkg/captcha"
+	configuration "crowdsec-bouncer-traefik-plugin/pkg/configuration"
+	ip "crowdsec-bouncer-traefik-plugin/pkg/ip"
+	logger "crowdsec-bouncer-traefik-plugin/pkg/logger"
 )
 
 const (
@@ -66,7 +66,8 @@ type Bouncer struct {
 	appsecFailureBlock      bool
 	appsecUnreachableBlock  bool
 	appsecBodyLimit         int64
-	crowdsecScheme          string
+	crowdsecLapiScheme      string
+	crowdsecAppsecScheme    string
 	crowdsecHost            string
 	crowdsecPath            string
 	crowdsecKey             string
@@ -158,7 +159,8 @@ func New(_ context.Context, next http.Handler, config *configuration.Config, nam
 		appsecFailureBlock:      config.CrowdsecAppsecFailureBlock,
 		appsecUnreachableBlock:  config.CrowdsecAppsecUnreachableBlock,
 		appsecBodyLimit:         config.CrowdsecAppsecBodyLimit,
-		crowdsecScheme:          config.CrowdsecLapiScheme,
+		crowdsecAppsecScheme:    config.CrowdsecAppsecScheme,
+		crowdsecLapiScheme:      config.CrowdsecLapiScheme,
 		crowdsecHost:            config.CrowdsecLapiHost,
 		crowdsecPath:            config.CrowdsecLapiPath,
 		crowdsecKey:             config.CrowdsecLapiKey,
@@ -425,7 +427,7 @@ func startTicker(config *configuration.Config, log *logger.Log, work func()) cha
 func handleNoStreamCache(bouncer *Bouncer, remoteIP string) (string, error) {
 	isLiveMode := bouncer.crowdsecMode == configuration.LiveMode
 	routeURL := url.URL{
-		Scheme:   bouncer.crowdsecScheme,
+		Scheme:   bouncer.crowdsecLapiScheme,
 		Host:     bouncer.crowdsecHost,
 		Path:     bouncer.crowdsecPath + crowdsecLapiRoute,
 		RawQuery: fmt.Sprintf("ip=%v&banned=true", remoteIP),
@@ -485,7 +487,7 @@ func handleNoStreamCache(bouncer *Bouncer, remoteIP string) (string, error) {
 
 func getToken(bouncer *Bouncer) error {
 	loginURL := url.URL{
-		Scheme: bouncer.crowdsecScheme,
+		Scheme: bouncer.crowdsecLapiScheme,
 		Host:   bouncer.crowdsecHost,
 		Path:   crowdsecCapiLoginRoute,
 	}
@@ -521,7 +523,7 @@ func handleStreamCache(bouncer *Bouncer) error {
 	}
 	bouncer.cacheClient.Set(cacheTimeoutKey, cache.NoBannedValue, bouncer.updateInterval-1)
 	streamRouteURL := url.URL{
-		Scheme:   bouncer.crowdsecScheme,
+		Scheme:   bouncer.crowdsecLapiScheme,
 		Host:     bouncer.crowdsecHost,
 		Path:     bouncer.crowdsecPath + bouncer.crowdsecStreamRoute,
 		RawQuery: fmt.Sprintf("startup=%t", !isCrowdsecStreamHealthy || isStartup),
@@ -601,7 +603,7 @@ func crowdsecQuery(bouncer *Bouncer, stringURL string, isPost bool) ([]byte, err
 
 func appsecQuery(bouncer *Bouncer, ip string, httpReq *http.Request) error {
 	routeURL := url.URL{
-		Scheme: bouncer.crowdsecScheme,
+		Scheme: bouncer.crowdsecAppsecScheme,
 		Host:   bouncer.appsecHost,
 		Path:   bouncer.appsecPath,
 	}

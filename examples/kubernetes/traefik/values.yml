@@ -13,5 +13,5 @@ logs:
 experimental:
   plugins:
     bouncer:
-      moduleName: "github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin"
+      moduleName: "crowdsec-bouncer-traefik-plugin"
       version: "v1.3.0"

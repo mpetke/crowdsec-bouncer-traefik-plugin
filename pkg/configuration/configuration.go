@@ -15,8 +15,8 @@ import (
 	"regexp"
 	"strings"
 
-	ip "github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin/pkg/ip"
-	logger "github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin/pkg/logger"
+	ip "crowdsec-bouncer-traefik-plugin/pkg/ip"
+	logger "crowdsec-bouncer-traefik-plugin/pkg/logger"
 )
 
 // Enums for crowdsec mode.
@@ -48,6 +48,7 @@ type Config struct {
 	CrowdsecAppsecFailureBlock               bool     `json:"crowdsecAppsecFailureBlock,omitempty"`
 	CrowdsecAppsecUnreachableBlock           bool     `json:"crowdsecAppsecUnreachableBlock,omitempty"`
 	CrowdsecAppsecBodyLimit                  int64    `json:"crowdsecAppsecBodyLimit,omitempty"`
+	CrowdsecAppsecScheme                     string   `json:"CrowdsecAppsecScheme,omitempty"`
 	CrowdsecLapiScheme                       string   `json:"crowdsecLapiScheme,omitempty"`
 	CrowdsecLapiHost                         string   `json:"crowdsecLapiHost,omitempty"`
 	CrowdsecLapiPath                         string   `json:"crowdsecLapiPath,omitempty"`
@@ -111,6 +112,7 @@ func New() *Config {
 		CrowdsecAppsecFailureBlock:     true,
 		CrowdsecAppsecUnreachableBlock: true,
 		CrowdsecAppsecBodyLimit:        10485760,
+		CrowdsecAppsecScheme:           HTTP,
 		CrowdsecLapiScheme:             HTTP,
 		CrowdsecLapiHost:               "crowdsec:8080",
 		CrowdsecLapiPath:               "/",

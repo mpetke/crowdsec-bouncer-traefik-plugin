@@ -8,9 +8,9 @@ import (
 	"testing"
 	"text/template"
 
-	cache "github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin/pkg/cache"
-	configuration "github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin/pkg/configuration"
-	ip "github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin/pkg/ip"
+	cache "crowdsec-bouncer-traefik-plugin/pkg/cache"
+	configuration "crowdsec-bouncer-traefik-plugin/pkg/configuration"
+	ip "crowdsec-bouncer-traefik-plugin/pkg/ip"
 )
 
 func TestServeHTTP(t *testing.T) {
@@ -69,7 +69,8 @@ func TestBouncer_ServeHTTP(t *testing.T) {
 		name                   string
 		template               *template.Template
 		enabled                bool
-		crowdsecScheme         string
+		crowdsecLapiScheme     string
+		crowdsecAppsecScheme   string
 		crowdsecHost           string
 		crowdsecKey            string
 		crowdsecMode           string
@@ -99,7 +100,8 @@ func TestBouncer_ServeHTTP(t *testing.T) {
 				name:                   tt.fields.name,
 				template:               tt.fields.template,
 				enabled:                tt.fields.enabled,
-				crowdsecScheme:         tt.fields.crowdsecScheme,
+				crowdsecLapiScheme:     tt.fields.crowdsecLapiScheme,
+				crowdsecAppsecScheme:   tt.fields.crowdsecAppsecScheme,
 				crowdsecHost:           tt.fields.crowdsecHost,
 				crowdsecKey:            tt.fields.crowdsecKey,
 				crowdsecMode:           tt.fields.crowdsecMode,

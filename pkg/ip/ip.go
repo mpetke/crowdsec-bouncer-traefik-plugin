@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"strings"
 
-	logger "github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin/pkg/logger"
+	logger "crowdsec-bouncer-traefik-plugin/pkg/logger"
 )
 
 // CHECKER
